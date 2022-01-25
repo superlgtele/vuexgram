@@ -49,6 +49,22 @@ const store = createStore({
     stepdown(state) {
       state.step--;
     },
+    stepzero(state) {
+      state.step = 0;
+    },
+    publish(state, payload) {
+      const publishBoard = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: "https://placeimg.com/640/480/arch",
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: payload,
+        filter: "perpetua",
+      };
+      state.instadata.unshift(publishBoard);
+    },
   },
   actions: {
     more(context) {

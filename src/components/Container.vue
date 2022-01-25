@@ -5,7 +5,10 @@
     </div>
 
     <div v-if="$store.state.step == 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image:url(${imageUrl})`"
+      ></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -16,9 +19,17 @@
     </div>
 
     <div v-if="$store.state.step == 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image:url(${imageUrl})`"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$store.commit('publish', $event.target.value)"
+          class="write-box"
+        >
+글을 작성해주세요!</textarea
+        >
       </div>
     </div>
   </div>
@@ -30,6 +41,9 @@ import Post from "./Post.vue";
 export default {
   components: {
     Post,
+  },
+  props: {
+    imageUrl: String,
   },
 };
 </script>

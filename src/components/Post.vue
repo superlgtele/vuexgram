@@ -1,7 +1,12 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
+      <div
+        class="profile"
+        :style="{
+          backgroundImage: `url(${InstaData.userImage})`,
+        }"
+      ></div>
       <span class="profile-name">{{ InstaData.name }}</span>
     </div>
     <div
@@ -33,7 +38,6 @@ export default {
   width: 100%;
 }
 .profile {
-  background-image: url("https://placeimg.com/100/100/arch");
   width: 30px;
   height: 30px;
   background-size: 100%;

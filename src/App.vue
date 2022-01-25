@@ -2,21 +2,42 @@
   <div>
     <div class="header">
       <ul class="header-button-left">
-        <li @click="$store.commit('stepdown')">Back</li>
+        <li
+          v-if="$store.state.step == 1 || $store.state.step == 2"
+          @click="$store.commit('stepdown')"
+        >
+          Back
+        </li>
       </ul>
       <ul class="header-button-right">
-        <li @click="$store.commit('stepup')">Next</li>
+        <li
+          v-if="$store.state.step == 0 || $store.state.step == 1"
+          @click="$store.commit('stepup')"
+        >
+          Next
+        </li>
+        <li v-if="$store.state.step == 2" @click="$store.commit('stepzero')">
+          발행
+        </li>
       </ul>
       <img src="./assets/logo.png" class="logo" />
     </div>
 
-    <Container />
+    <Container v-bind:imageUrl="imageUrl" />
 
-    <button @click="$store.dispatch('more')">더보기</button>
+    <button v-if="$store.state.step == 0" @click="$store.dispatch('more')">
+      더보기
+    </button>
 
-    <div class="footer">
+    <div v-if="$store.state.step == 0" class="footer">
       <ul class="footer-button-plus">
-        <input type="file" id="file" class="inputfile" />
+        <input
+          @change="upload"
+          accept="image/*"
+          type="file"
+          id="file"
+          class="inputfile"
+        />
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
@@ -28,10 +49,20 @@ import Container from "./components/Container.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      imageUrl: "",
+    };
+  },
   components: {
     Container: Container,
   },
-  methods: {},
+  methods: {
+    upload(e) {
+      this.imageUrl = URL.createObjectURL(e.target.files[0]);
+      this.$store.commit("stepup");
+    },
+  },
 };
 </script>
 
