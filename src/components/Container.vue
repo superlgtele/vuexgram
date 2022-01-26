@@ -1,7 +1,12 @@
 <template>
   <div>
     <div v-if="$store.state.step == 0">
-      <Post v-bind:InstaData="a" v-for="a in $store.state.instadata" :key="a" />
+      <Post
+        v-bind:InstaData="a"
+        v-bind:selectIndex="i"
+        v-for="(a, i) in $store.state.instadata"
+        :key="i"
+      />
     </div>
 
     <div v-if="$store.state.step == 1">

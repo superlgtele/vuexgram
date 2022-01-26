@@ -12,8 +12,8 @@ const store = createStore({
           likes: 36,
           date: "May 15",
           liked: false,
-          content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
-          filter: "",
+          content: "꾸준히 공부를 하다보면 좋은 날이 올거에요^^",
+          filter: "hudson",
         },
         {
           name: "John Doe",
@@ -23,7 +23,7 @@ const store = createStore({
           date: "Apr 20",
           liked: false,
           content: "흔한 자랑스타그램",
-          filter: "",
+          filter: "lofi",
         },
         {
           name: "Minny",
@@ -32,17 +32,17 @@ const store = createStore({
           likes: 49,
           date: "Apr 4",
           liked: false,
-          content: "우리집 개는 화장실 물도 내림",
-          filter: "",
+          content: "귀여운 동물사진 구경하세요!",
+          filter: "willow",
         },
       ],
       step: 0,
       publishBoard: {
-        name: "Kim Hyun",
-        userImage: "https://placeimg.com/100/100/arch",
+        name: "Honggi",
+        userImage: "https://placeimg.com/100/100/people",
         postImage: "",
-        likes: 36,
-        date: "May 15",
+        likes: 501,
+        date: "May 3",
         liked: false,
         content: "",
         filter: "",
@@ -62,13 +62,22 @@ const store = createStore({
     publish(state, payload) {
       state.publishBoard.content = payload;
     },
+    fire(state, payload) {
+      state.publishBoard.filter = payload;
+    },
     finalPublish(state, payload) {
       state.publishBoard.postImage = payload;
       state.instadata.unshift(state.publishBoard);
       state.step = 0;
     },
-    fire(state, payload) {
-      state.publishBoard.filter = payload;
+    likeUp(state, payload) {
+      if (state.instadata[payload].liked == false) {
+        state.instadata[payload].likes++;
+        state.instadata[payload].liked = true;
+      } else {
+        state.instadata[payload].likes--;
+        state.instadata[payload].liked = false;
+      }
     },
   },
   actions: {
