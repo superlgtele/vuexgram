@@ -13,7 +13,7 @@ const store = createStore({
           date: "May 15",
           liked: false,
           content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
-          filter: "perpetua",
+          filter: "",
         },
         {
           name: "John Doe",
@@ -23,7 +23,7 @@ const store = createStore({
           date: "Apr 20",
           liked: false,
           content: "흔한 자랑스타그램",
-          filter: "clarendon",
+          filter: "",
         },
         {
           name: "Minny",
@@ -33,10 +33,20 @@ const store = createStore({
           date: "Apr 4",
           liked: false,
           content: "우리집 개는 화장실 물도 내림",
-          filter: "lofi",
+          filter: "",
         },
       ],
       step: 0,
+      publishBoard: {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: "",
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "",
+        filter: "",
+      },
     };
   },
   mutations: {
@@ -49,21 +59,16 @@ const store = createStore({
     stepdown(state) {
       state.step--;
     },
-    stepzero(state) {
+    publish(state, payload) {
+      state.publishBoard.content = payload;
+    },
+    finalPublish(state, payload) {
+      state.publishBoard.postImage = payload;
+      state.instadata.unshift(state.publishBoard);
       state.step = 0;
     },
-    publish(state, payload) {
-      const publishBoard = {
-        name: "Kim Hyun",
-        userImage: "https://placeimg.com/100/100/arch",
-        postImage: "https://placeimg.com/640/480/arch",
-        likes: 36,
-        date: "May 15",
-        liked: false,
-        content: payload,
-        filter: "perpetua",
-      };
-      state.instadata.unshift(publishBoard);
+    fire(state, payload) {
+      state.publishBoard.filter = payload;
     },
   },
   actions: {

@@ -10,6 +10,7 @@
       <span class="profile-name">{{ InstaData.name }}</span>
     </div>
     <div
+      :class="$store.state.publishBoard.filter"
       class="post-body"
       :style="{
         backgroundImage: `url(${InstaData.postImage})`,
@@ -27,6 +28,7 @@
 
 <script>
 export default {
+  name: "Post",
   props: {
     InstaData: Object,
   },

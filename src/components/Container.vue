@@ -6,20 +6,23 @@
 
     <div v-if="$store.state.step == 1">
       <div
+        :class="$store.state.publishBoard.filter"
         class="upload-image"
         :style="`background-image:url(${imageUrl})`"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-bind:imageUrl="imageUrl"
+          v-bind:eachFilter="selectFilter"
+          v-for="selectFilter in manyfilters"
+          :key="selectFilter"
+        />
       </div>
     </div>
 
     <div v-if="$store.state.step == 2">
       <div
+        :class="$store.state.publishBoard.filter"
         class="upload-image"
         :style="`background-image:url(${imageUrl})`"
       ></div>
@@ -37,10 +40,45 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
+  name: "Container",
+  data() {
+    return {
+      manyfilters: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
   components: {
     Post,
+    FilterBox,
   },
   props: {
     imageUrl: String,

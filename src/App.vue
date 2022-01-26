@@ -16,7 +16,10 @@
         >
           Next
         </li>
-        <li v-if="$store.state.step == 2" @click="$store.commit('stepzero')">
+        <li
+          v-if="$store.state.step == 2"
+          @click="$store.commit('finalPublish', imageUrl)"
+        >
           발행
         </li>
       </ul>
